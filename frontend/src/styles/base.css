@@ -1,0 +1,268 @@
+/* 作用：定义全站颜色、字体、按钮、卡片和响应式基础样式。 */
+:root {
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  color: #182235;
+  background: #f4f6fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --primary-color: #4659d9;
+  --primary-hover: #3548c5;
+  --primary-soft: #eef0ff;
+  --accent-color: #0f9f8f;
+  --accent-soft: #e8f7f4;
+  --danger-color: #d94a5a;
+  --danger-soft: #fff0f2;
+  --warning-color: #a1660a;
+  --warning-soft: #fff7e8;
+  /* 成功文字色：比 --accent-color 更深，用在浅绿底上更清楚 */
+  --success-text: #08776b;
+  --text-strong: #182235;
+  --text-secondary: #4f5c72;
+  --text-muted: #7a8599;
+  --surface-color: #ffffff;
+  --surface-muted: #f7f8fc;
+  --border-color: #e2e6ef;
+  --shadow-soft: 0 18px 50px rgba(35, 48, 90, 0.08);
+  --shadow-card: 0 8px 24px rgba(35, 48, 90, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 键盘用户按 Tab 时给一个清晰的焦点圈；鼠标点击不会出现这个圈。 */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(70, 89, 217, 0.09), transparent 24rem),
+    radial-gradient(circle at 88% 24%, rgba(15, 159, 143, 0.07), transparent 22rem),
+    #f4f6fb;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-heading {
+  margin-bottom: 28px;
+}
+
+.page-heading h1 {
+  margin-bottom: 10px;
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+}
+
+.page-heading p {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--surface-color) 96%, transparent);
+  box-shadow: var(--shadow-card);
+}
+
+/* 每个功能区左上角的小标题，例如「步骤 1」。所有卡片统一用同一个颜色，
+   避免上传是蓝的、预览是绿的、分析是紫的，看起来像三套设计。 */
+.step-label {
+  margin-bottom: 5px;
+  color: var(--primary-color);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.section-title h2,
+.section-title h3 {
+  margin: 0;
+}
+
+.section-title h2 {
+  font-size: 20px;
+}
+
+.section-title h3 {
+  font-size: 16px;
+}
+
+.section-title span {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  min-height: 42px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.primary-button {
+  color: #fff;
+  background: var(--primary-color);
+  box-shadow: 0 10px 24px rgba(70, 89, 217, 0.2);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.secondary-button {
+  color: var(--primary-color);
+  background: var(--primary-soft);
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: #e2e6ff;
+}
+
+.ghost-button {
+  color: var(--text-secondary);
+  background: var(--surface-muted);
+  border: 1px solid var(--border-color);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.ghost-button:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 表格行里的小按钮：在三个按钮类后面，统一把尺寸缩小一点。 */
+.primary-button.small,
+.secondary-button.small,
+.ghost-button.small {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.status-message {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.status-message.error {
+  color: var(--danger-color);
+  background: var(--danger-soft);
+}
+
+.status-message.success {
+  color: var(--success-text);
+  background: var(--accent-soft);
+}
+
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-heading {
+    margin-bottom: 22px;
+  }
+
+  .card {
+    border-radius: 18px;
+  }
+}
+
+/* 系统设置了「减少动态效果」时，关掉所有动画和过渡。 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

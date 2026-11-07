@@ -1,0 +1,21 @@
+{
+  "name": "ai-document-assistant-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AI 文档分析与知识助手平台的 Vue 3 前端学习项目",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.5"
+  }
+}

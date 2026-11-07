@@ -1,0 +1,7 @@
+# 作用：忽略依赖、构建产物和本地环境变量，避免提交无关文件。
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
