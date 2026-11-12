@@ -8,6 +8,7 @@
         <h2>AI 结构化分析</h2>
       </div>
       <div class="title-actions">
+        <!-- 展开全部按钮 -->
         <button
           v-if="result"
           class="ghost-button small"
@@ -15,6 +16,20 @@
           @click="expanded = !expanded"
         >
           {{ expanded ? '收起' : '展开全部' }}
+        </button>
+        <!-- 导出 Markdown 按钮 -->
+        <button
+          v-if="result"
+          class="ghost-button small export-button"
+          type="button"
+          @click="handleExport"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          导出 Markdown
         </button>
         <span>Structured Output</span>
       </div>
@@ -83,9 +98,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { formatAnalysisMarkdown } from '../utils/analysisMarkdown.js';
 
-defineProps({
+const props = defineProps({
   result: {
     type: Object,
     default: null,
@@ -102,6 +118,21 @@ const expanded = ref(false)
 
 function safeList(value) {
   return Array.isArray(value) ? value : []
+}
+
+// 导出 Markdown 文件
+function handleExport() {
+  if (!props.result) return
+  const md = formatAnalysisMarkdown(props.result)
+  const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `分析结果-${Date.now()}.md`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }
 </script>
 
@@ -136,6 +167,20 @@ function safeList(value) {
   align-items: center;
   gap: 12px;
   flex: 0 0 auto;
+}
+
+.export-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--primary-color);
+  border-color: #c8cefb;
+}
+
+.export-button:hover {
+  color: #fff;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .loading-state,
